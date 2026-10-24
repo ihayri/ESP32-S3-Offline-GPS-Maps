@@ -48,6 +48,21 @@ The `data` directory contains the vector map files:
 
 The map data is stored in FFat on the ESP32-S3. The `.vec` files must be uploaded to the device's filesystem separately from the Arduino sketch.
 
+## MapMaker
+
+The `MapMaker` folder contains example Python scripts and vector map data used during development.
+
+The scripts demonstrate parts of the process used to extract and prepare road and forest data for the ESP32-S3 map display.
+
+**Contents include:**
+- `extract_roads.py` — road extraction script.
+- `check_areas.py` — area-checking utility.
+- `chernik_with_forests.py` and `chernik_with_forests_relations.py` — scripts for working with forest areas and relations.
+- `chernik.vec` and `forests.vec` — example vector map data.
+- `script backup.txt` — a backup of a development script.
+
+These files are provided as development examples, not as a complete, ready-to-run map-generation package. The original OpenStreetMap source file is not included.
+
 ## Documentation
 
 - [ESP32 T-RGB Map Data Guide (PDF)](ESP32_T_RGB_Map_Data_Guide.pdf) — Guide to the map data.
