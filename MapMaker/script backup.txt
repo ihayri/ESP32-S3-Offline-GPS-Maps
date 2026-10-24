@@ -1,0 +1,171 @@
+//script backup
+
+#!/usr/bin/env python3
+import osmium
+import struct
+import math
+import sys
+import os
+
+PBF_FILE = "bulgaria-latest.osm.pbf"
+OUT_FILE = "chernik.vec"
+
+# Bbox: Dulovo, Silistra, Shumen, Varna
+MIN_LAT = 43.10
+MAX_LAT = 44.20
+MIN_LON = 26.70
+MAX_LON = 28.00
+
+# ~5 m
+SIMPLIFY_TOL = 0.00005
+
+TIER_LOCAL   = 0
+TIER_MID     = 1
+TIER_PRIMARY = 2
+TIER_TRUNK   = 3
+TIER_RAIL    = 4
+
+KEEP_HIGHWAYS = {
+    "motorway":       TIER_TRUNK,
+    "motorway_link":  TIER_TRUNK,
+    "trunk":          TIER_TRUNK,
+    "trunk_link":     TIER_TRUNK,
+    "primary":        TIER_PRIMARY,
+    "primary_link":   TIER_PRIMARY,
+    "secondary":      TIER_MID,
+    "secondary_link": TIER_MID,
+    "tertiary":       TIER_MID,
+    "tertiary_link":  TIER_MID,
+    "unclassified":   TIER_LOCAL,
+    "residential":    TIER_LOCAL,
+    "living_street":  TIER_LOCAL,
+    "service":        TIER_LOCAL,
+    "track":          TIER_LOCAL,
+    "path":           TIER_LOCAL,
+    "footway":        TIER_LOCAL,
+}
+
+KEEP_RAILWAYS = {
+    "rail":         TIER_RAIL,
+    "light_rail":   TIER_RAIL,
+    "narrow_gauge": TIER_RAIL,
+    "subway":       TIER_RAIL,
+    "tram":         TIER_RAIL,
+    "monorail":     TIER_RAIL,
+}
+
+
+def in_bbox(lat, lon):
+    return (MIN_LAT <= lat <= MAX_LAT and
+            MIN_LON <= lon <= MAX_LON)
+
+
+def perp_dist(p, a, b):
+    if a == b:
+        return math.hypot(p[0] - a[0], p[1] - a[1])
+    t = (((p[0] - a[0]) * (b[0] - a[0]) + (p[1] - a[1]) * (b[1] - a[1])) /
+         ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2))
+    t = max(0.0, min(1.0, t))
+    proj = (a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1]))
+    return math.hypot(p[0] - proj[0], p[1] - proj[1])
+
+
+def douglas_peucker(points, tol):
+    if len(points) < 3:
+        return points
+    idx, dmax = 0, 0.0
+    for i in range(1, len(points) - 1):
+        d = perp_dist(points[i], points[0], points[-1])
+        if d > dmax:
+            idx, dmax = i, d
+    if dmax > tol:
+        left = douglas_peucker(points[: idx + 1], tol)
+        right = douglas_peucker(points[idx:], tol)
+        return left[:-1] + right
+    return [points[0], points[-1]]
+
+
+class RoadHandler(osmium.SimpleHandler):
+    def __init__(self):
+        super().__init__()
+        self.segments = []
+
+    def way(self, w):
+        tier = None
+        hw = w.tags.get("highway")
+        if hw in KEEP_HIGHWAYS:
+            tier = KEEP_HIGHWAYS[hw]
+        if tier is None:
+            rw = w.tags.get("railway")
+            if rw in KEEP_RAILWAYS:
+                tier = KEEP_RAILWAYS[rw]
+        if tier is None:
+            return
+
+        pts = []
+        has_point_in_bbox = False
+        for n in w.nodes:
+            try:
+                lat = n.location.lat
+                lon = n.location.lon
+            except osmium.InvalidLocationError:
+                return
+            if in_bbox(lat, lon):
+                has_point_in_bbox = True
+            pts.append((lat, lon))
+
+        if not has_point_in_bbox:
+            return
+        if len(pts) < 2:
+            return
+
+        pts = douglas_peucker(pts, SIMPLIFY_TOL)
+        if len(pts) >= 2:
+            self.segments.append((tier, pts))
+
+
+def main():
+    print(f"Reading {PBF_FILE}")
+    h = RoadHandler()
+    h.apply_file(PBF_FILE, locations=True)
+    print(f"Found {len(h.segments)} segments")
+    if not h.segments:
+        sys.exit(1)
+
+    lat_span = MAX_LAT - MIN_LAT
+    lon_span = MAX_LON - MIN_LON
+
+    # Fit full bbox into signed int16 (-32768..32767).
+    # Old 60000 range overflowed and crushed the north/east of the map.
+    lat_scale = max(1, int(30000 / lat_span))
+    lon_scale = max(1, int(30000 / lon_span))
+    print(f"lat_scale={lat_scale} lon_scale={lon_scale}")
+    print(f"q at MAX_LAT: {int(lat_span * lat_scale)} (must be <= 32767)")
+    print(f"q at MAX_LON: {int(lon_span * lon_scale)} (must be <= 32767)")
+
+    with open(OUT_FILE, "wb") as f:
+        f.write(struct.pack("<I", 0x56454331))
+        f.write(struct.pack("<i", int(MIN_LAT * 1e7)))
+        f.write(struct.pack("<i", int(MIN_LON * 1e7)))
+        f.write(struct.pack("<i", int(MAX_LAT * 1e7)))
+        f.write(struct.pack("<i", int(MAX_LON * 1e7)))
+        f.write(struct.pack("<I", lat_scale))
+        f.write(struct.pack("<I", lon_scale))
+        f.write(struct.pack("<I", len(h.segments)))
+
+        for tier, pts in h.segments:
+            f.write(struct.pack("<B", tier))
+            f.write(struct.pack("<H", len(pts)))
+            for lat, lon in pts:
+                qlat = int(round((lat - MIN_LAT) * lat_scale))
+                qlon = int(round((lon - MIN_LON) * lon_scale))
+                qlat = max(-32768, min(32767, qlat))
+                qlon = max(-32768, min(32767, qlon))
+                f.write(struct.pack("<h", qlat))
+                f.write(struct.pack("<h", qlon))
+
+    print(f"Wrote {OUT_FILE} ({os.path.getsize(OUT_FILE) / 1024:.1f} KB)")
+
+
+if __name__ == "__main__":
+    main()
