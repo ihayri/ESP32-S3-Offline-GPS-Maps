@@ -88,4 +88,15 @@ The correct board configuration, filesystem upload method and GPS wiring depend 
 
 ## License
 
-License information will be added later.
+The software in this repository is licensed under the
+[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0).
+
+You may use, study, modify, and redistribute the software for non-commercial purposes
+under the terms of the license. Commercial use requires separate permission from
+the copyright holder.
+
+This project is source-available, not officially open source, because commercial use
+is restricted.
+
+The license applies to the software authored for this project. Map data, photographs,
+and third-party libraries may have separate copyright or licensing terms.

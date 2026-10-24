@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Simple, standard, plain-language software licenses.">
+  <meta name="theme-color" content="#fefefe">
+  <link rel="icon" href="/polyform-favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/polyform-favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PolyForm Project">
+  <meta property="og:title" content="NonCommercial 1.0.0">
+  <meta property="og:description" content="Simple, standard, plain-language software licenses.">
+  <meta property="og:image" content="https://polyformproject.org/polyform-social.png">
+  <meta property="og:image:secure_url" content="https://polyformproject.org/polyform-social.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PolyForm Project logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NonCommercial 1.0.0">
+  <meta name="twitter:description" content="Simple, standard, plain-language software licenses.">
+  <meta name="twitter:image" content="https://polyformproject.org/polyform-social.png">
+  <meta name="twitter:image:alt" content="PolyForm Project logo">
+  <title>NonCommercial 1.0.0</title>
+  <link href="/normalize.css" rel="stylesheet">
+  <link href="/styles.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <a href="/"><img alt="PolyForm logo" src="/polyform-logo.png"></a>
+  </header>
+  <nav>
+    <a href="/">Home</a> <a href="/licenses">Licenses</a> <a href="/adopters">Adopters</a> <a href="/contribute">Contribute</a> <a href="/announcements">Announcements</a> <a href="/about">About</a>
+  </nav>
+  <main>
+    <aside>
+      Official Plain Text of NonCommercial 1.0.0 <a class="plainTextDownload" href="/licenses/noncommercial/1.0.0.txt" download="PolyForm NonCommercial 1.0.0.txt">Download</a>
+    </aside>
+    <h1>PolyForm Noncommercial License 1.0.0</h1>
+    <p><a href="https://polyformproject.org/licenses/noncommercial/1.0.0">https://polyformproject.org/licenses/noncommercial/1.0.0</a></p>
+    <h2>Acceptance</h2>
+    <p>In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.</p>
+    <h2>Copyright License</h2>
+    <p>The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose. However, you may only distribute the software according to <a href="#distribution-license">Distribution License</a> and make changes or new works based on the software according to <a href="#changes-and-new-works-license">Changes and New Works License</a>.</p>
+    <h2>Distribution License</h2>
+    <p>The licensor grants you an additional copyright license to distribute copies of the software. Your license to distribute covers distributing the software with changes and new works permitted by <a href="#changes-and-new-works-license">Changes and New Works License</a>.</p>
+    <h2>Notices</h2>
+    <p>You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with <code>Required Notice:</code> that the licensor provided with the software. For example:</p>
+    <blockquote>
+      <p>Required Notice: Copyright Yoyodyne, Inc. (http://example.com)</p>
+    </blockquote>
+    <h2>Changes and New Works License</h2>
+    <p>The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.</p>
+    <h2>Patent License</h2>
+    <p>The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.</p>
+    <h2>Noncommercial Purposes</h2>
+    <p>Any noncommercial purpose is a permitted purpose.</p>
+    <h2>Personal Uses</h2>
+    <p>Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, is use for a permitted purpose.</p>
+    <h2>Noncommercial Organizations</h2>
+    <p>Use by any charitable organization, educational institution, public research organization, public safety or health organization, environmental protection organization, or government institution is use for a permitted purpose regardless of the source of funding or obligations resulting from the funding.</p>
+    <h2>Fair Use</h2>
+    <p>You may have "fair use" rights for the software under the law. These terms do not limit them.</p>
+    <h2>No Other Rights</h2>
+    <p>These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else. These terms do not imply any other licenses.</p>
+    <h2>Patent Defense</h2>
+    <p>If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately. If your company makes such a claim, your patent license ends immediately for work on behalf of your company.</p>
+    <h2>Violations</h2>
+    <p>The first time you are notified in writing that you have violated any of these terms, or done anything with the software not covered by your licenses, your licenses can nonetheless continue if you come into full compliance with these terms, and take practical steps to correct past violations, within 32 days of receiving notice. Otherwise, all your licenses end immediately.</p>
+    <h2>No Liability</h2>
+    <p><em><strong>As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.</strong></em></p>
+    <h2>Definitions</h2>
+    <p>The <strong>licensor</strong> is the individual or entity offering these terms, and the <strong>software</strong> is the software the licensor makes available under these terms.</p>
+    <p><strong>You</strong> refers to the individual or entity agreeing to these terms.</p>
+    <p><strong>Your company</strong> is any legal entity, sole proprietorship, or other kind of organization that you work for, plus all organizations that have control over, are under the control of, or are under common control with that organization. <strong>Control</strong> means ownership of substantially all the assets of an entity, or the power to direct its management and policies by vote, contract, or otherwise. Control can be direct or indirect.</p>
+    <p><strong>Your licenses</strong> are all the licenses granted to you for the software under these terms.</p>
+    <p><strong>Use</strong> means anything you do with the software requiring one of your licenses.</p>
+  </main>
+  <footer>
+    © PolyForm Project Inc.
+  </footer>
+</body>
+</html>
