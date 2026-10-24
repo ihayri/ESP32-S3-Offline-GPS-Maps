@@ -48,6 +48,10 @@ The `data` directory contains the vector map files:
 
 The map data is stored in FFat on the ESP32-S3. The `.vec` files must be uploaded to the device's filesystem separately from the Arduino sketch.
 
+## Documentation
+
+- [ESP32 T-RGB Map Data Guide (PDF)](ESP32_T_RGB_Map_Data_Guide.pdf) — Guide to the map data.
+
 ## Software
 
 The project is developed using the Arduino framework.
