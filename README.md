@@ -10,13 +10,19 @@ The project renders vector map data stored locally on the device, so the map doe
 
 ▶ [Watch the video on YouTube](https://youtu.be/yi_knFQ-pgQ)
 
-## Photos
+## Build Photos
 
-<!-- Add project photos to an images/ directory and replace these examples. -->
+### Photo 1
+![Build photo 1](Build_pictures/IMG_20261023_213838690_HDR.jpg)
 
-<!-- ![GPS map display](images/gps-map-display.jpg) -->
+### Photo 2
+![Build photo 2](Build_pictures/IMG_20261023_214445319.jpg)
 
-<!-- ![Device in operation](images/gps-map-in-use.jpg) -->
+### Photo 3
+![Build photo 3](Build_pictures/IMG_20261023_214527746.jpg)
+
+### Photo 4
+![Build photo 4](Build_pictures/IMG_20261024_121028554_HDR.jpg)
 
 ## Features
 
